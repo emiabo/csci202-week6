@@ -1,12 +1,15 @@
 # CSCI 202 Assignment 6
-## Concept
-> Digital Zine - Working individually or in a small group create a digital zine about [one of the recorded talks form the Internet Studies lecture series](https://www.youtube.com/channel/UC6XTvy4F9kpQwd6nRvo2Otg). Listen to their talk closely, and then use your digital zine to respond, interpret, or showcase their argument or ideas.
+## Options
+1. *2M* - A simulation/game about staying in your personal space. Inspired by my pandemic experiences of constantly keeping track of being 6 feet apart from everyone, and thus visualizing "bubbles" that get contaminated the longer they overlap.
+    - Page will be composed of 2 layers
+        - A window-spanning p5 canvas that scales all objects appropriately for different screen sizes/resolutions, and works reasonably well with touch/mouse/keyboard controls. Mobile support is something my last two projects were lacking.
+        - Interface/info layer drawn *atop* the canvas as a normal webpage, for start screen, control guide, FAQ, about the developer, maybe even some sort of story/interactive fiction, will think about how best to use this. This layer may make use of JQuery events.
+    - Player actor will be represented by a user-selectable emoji surrounded by a bubble with radius 2m. Moved by either dragging anywhere on the page with mouse, tapping and dragging (i.e. virtual joystick that modern mobile games use), or 8-directional keyboard controls
+    - Other actors will be scattered around the screen, moving [randomly?]; if they come within the bubble, [begin filling it from the outside in/begin some glitch effect on full page], player must move away from them quickly or they will suffer [some sustained effect]
+    - Potential: multiple levels with objectives (e.g. get the groceries), sound effects (with p5.sound distortions), royalty-free music to sell the atmosphere
+    - Position of actors will be determined by realistic physics (i.e. inputs apply directional forces to the actor, window uses zero-gravity field). Could be done using a basic 2D physics engine like [Matter.js](https://brm.io/matter-js/) while still rendering with P5.
+2. Flesh out Project 4 - Daily Grind to my original concept, of the overlapping minigames and eventual taking control of both simultaneously (an intentionally impossible task).
+3. Digital Zine - [Look through the lecture series](https://www.youtube.com/channel/UC6XTvy4F9kpQwd6nRvo2Otg).
 
-- Look through the lecture series
-
-> Keep exploring that idea - Your passion is calling. You're excited about a specific idea. It could take the form of a zine, a game, a dynamic map of fires in the PNW, you tell me... the sky  is the limit, or should I say low earth orbit. 
-
-- *2M* - Game about staying in your personal space. Had this idea since before I took the class. Maybe p5 spanning the whole page, with popover website explaining the concept and additional writings.
-- Flesh out Project 4 - Daily Grind to my original concept
 ## Progress
 - [ ] Figma prototype
