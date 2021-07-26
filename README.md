@@ -1,4 +1,9 @@
 # CSCI 202 Assignment 6 - 2M
+
+#### This project is currently only tested on iPhone X screen size. Other devices may work, but icons may be off center, text an awkward size, etc. Try using your browser's device simulator if you are on desktop.
+
+#### Also: possible photosensitivity warning (makes use of a TV-static gif and flickering boxes around the screen)
+
 A simulation/game about staying in your personal space. Inspired by my pandemic experiences of constantly keeping track of being 6 feet apart from everyone, and thus visualizing "bubbles" that get contaminated the longer they overlap.
     - Page will be composed of 2 layers
         - A window-spanning p5 canvas that scales all objects appropriately for different screen sizes/resolutions, and works reasonably well with touch/mouse/keyboard controls. Mobile support is something my last two projects were lacking.
@@ -11,3 +16,13 @@ A simulation/game about staying in your personal space. Inspired by my pandemic 
 ## Progress
 - [x] [Figma prototype](https://www.figma.com/file/ZbV3y6qCDFkWm8MaQmXILX/2M?node-id=0%3A1)
 - [x] Project setup
+- [x] Basic simulation display
+    - [ ] TV static display when infected (uses bubblemask.png)
+    - [ ] Random bars on sides of canvas that scale with infectedFactor
+    - [ ] Random emoji selected from JSON file
+    - [ ] Cycle through bubbleColor with Perlin noise
+- [ ] Physics engine and controls
+    - [ ] Integrate Matter engine
+- [ ] Title screen
+- [ ] FAQ page
+- [ ] Sounds

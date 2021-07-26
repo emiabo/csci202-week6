@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', monospace;
+}
+/*Work on once simulation is working*/
+#titleLayer, #faqLayer {
+    display: none;
+}
+
+#titleLayer {
+    position: absolute;
+}
+
+#faqLayer {
+    position: absolute;
+}
+
+#faqLayer h2, #faqLayer p {
+    text-align: left;
+}
+/*Icons drawn are always from the top corner, not sure how to fix this universally*/
+#iconLayer div {
+    text-align: center;
+    font-size: 10vw;
+    display: inline;
+}
+
+canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
