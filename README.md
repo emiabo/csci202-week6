@@ -1,8 +1,8 @@
-# CSCI 202 Assignment 6 - 2M
+# [CSCI 202 Assignment 6 - 2M](https://emiabo.github.io/csci202-week6/)
 
-#### This project is made for mobile and currently only tested on iPhone X screen size. Other devices may work, but are huge due to a known display density issue. Try using your browser's device simulator if you are on desktop.
+#### This project is made for mobile and currently only tested on iPhone X screen size. Other devices may work, but some logic is tied to display size (working on it). Try using your browser's device simulator (Inspect > Toggle Device Toolbar on Chrome)
 
-#### Also: photosensitivity warning (makes use of a TV-static gif and flickering boxes around the screen)
+#### Also: photosensitivity warning (makes use of a TV-static gif and flickering boxes around the screen). Press any key or tap with 2+ fingers to disable these.
 
 A simulation/game about staying in your personal space. Inspired by my pandemic experiences of constantly keeping track of being 6 feet apart from everyone, and thus visualizing "bubbles" that get contaminated the longer they overlap.
     - Page will be composed of 2 layers
@@ -21,14 +21,21 @@ A simulation/game about staying in your personal space. Inspired by my pandemic 
     - [x] Random bars on sides of canvas that scale with infectedFactor
     - [x] Random emoji selected from JSON file
     - [x] Cycle through bubbleColor with Perlin noise
-    - [?] Infection detecting
-        - Known issue: infection does not decrement, so it is cumulative.
-- [ ] Physics engine and controls
-    - [ ] Integrate Matter engine
+    - [x] Infection detecting
+    - [x] Reset infected when click/tap outside player bubble
+    - [x] Ensure drawGlitch does not run at all when infected is 0
+    - [x] Ensure player.x and player.y cannot exceed display bounds
+- [x] Physics engine and controls
+    - [...] Integrate Matter engine
+    - [x] Direct controls (click/tap and drag on player)
 - [ ] Title screen
-- [ ] FAQ page
+- [...] FAQ page
 - [ ] Sounds
-- [ ] Test scaling
-- [ ] Photosensitive mode (disables flickering animations)
+- [x] Test scaling (scale down to mobile screen size on larger devices)
+- [x] Photosensitive mode (disables flickering animations)
+    - Turn on: any keyboard key or tap with 2+ fingers
+- [ ] Improve time to infect, width of glitch effect
+## Known issues
+- Animation speed, particularly bubble filling, varies with display dimensions and is sometimes nearly instant.
 
 Trans 🏳️‍⚧️ rights!
