@@ -1,5 +1,10 @@
 //Matter dependencies
-
+const Engine = Matter.Engine;
+const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+const Composite = Matter.Composite;
+const Runner = Matter.Runner;
+var engine;
 const NPCS = 3;
 var BUBBLE_DIAMETER;
 var iconOffset;
@@ -34,18 +39,25 @@ function setup() {
     imageMode(CENTER);
     textAlign(CENTER, CENTER);
     textSize(iconSize);
+    //Matter instances
+    engine = Engine.create();
+    engine.gravity = 0;
+
+    //create walls at edges of canvas
+
+
     //create player actor
     player = new Actor(true);
+    Composite.add(engine.world, player.body);
     //create others
     for (var i = 0; i < NPCS; i++) {
         actors.push(new Actor(false));
     }
-    //Matter instances
+    Runner.run(engine);
 }
 
 function draw() {
     clear();
-
     //draw player
     player.drawActor();
 
@@ -53,10 +65,11 @@ function draw() {
     for (var i = 0; i < NPCS; i++) {
         actors[i].drawActor();
     }
+    player.moveActor();
 
     //infection detection
     for (var i = 0; i < actors.length; i++) {
-        if (dist(player.x, player.y, actors[i].x, actors[i].y) < BUBBLE_DIAMETER/2 && bubble < BUBBLE_DIAMETER) {
+        if (dist(player.body.position.x, player.body.position.y, actors[i].body.position.x, actors[i].body.position.y) < BUBBLE_DIAMETER/2 && bubble < BUBBLE_DIAMETER) {
             bubble++;
         } else if (bubble >= BUBBLE_DIAMETER) {
             infected = 100;
@@ -70,14 +83,12 @@ class Actor {
     constructor(isPlayer) {
         if (isPlayer) {
             this.isPlayer = true;
-            this.x = actualWidth / 2;
-            this.y = actualHeight / 2;
+            this.body = Bodies.circle(actualWidth/2, actualHeight/2, 10, {isStatic: true});
             this.iconValue = "😷";
             //Placeholder color, write function that cycles RGB or use Perlin noise
             this.bubbleColor = '#FF0000';
         } else {
-            this.x = round(random(actualWidth-iconOffset));
-            this.y = round(random(actualHeight-iconOffset));
+            this.body = Bodies.circle(round(random(actualWidth-iconOffset)), round(random(actualHeight-iconOffset)), 10);
             //Placeholder icon, select random emoji from JSON list
             this.iconValue = emojiDB[round(random(4590))];
             this.bubbleColor = '#c4c4c4';
@@ -89,7 +100,7 @@ class Actor {
         if(this.isPlayer) {
             //TVstatic goes under here
             if (infected == 100) {
-                image(tvStatic[tvFrame], this.x, this.y, BUBBLE_DIAMETER, BUBBLE_DIAMETER);
+                image(tvStatic[tvFrame], this.body.position.x, this.body.position.y, BUBBLE_DIAMETER, BUBBLE_DIAMETER);
 
                 if (tvFrame < 2) {
                     tvFrame++;
@@ -99,17 +110,24 @@ class Actor {
             } else {
                 this.setBubbleColor();
                 fill(this.bubbleColor);
-                circle(this.x, this.y, BUBBLE_DIAMETER);
+                circle(this.body.position.x, this.body.position.y, BUBBLE_DIAMETER);
                 fill('#FFFFFF');
-                circle(this.x, this.y, BUBBLE_DIAMETER-bubble); 
+                circle(this.body.position.x, this.body.position.y, BUBBLE_DIAMETER-bubble); 
             }
         }
         pop();
-        text(this.iconValue, this.x, this.y);
+        text(this.iconValue, this.body.position.x, this.body.position.y);
     }
     setBubbleColor() {
         let changeRate = 0.05;
         this.bubbleColor = color(round(256*noise(frameCount*changeRate)), round(256*noise(frameCount*changeRate, frameCount*changeRate)), round(256*noise(frameCount*changeRate, frameCount*changeRate, frameCount*changeRate)), 128);
+    }
+    moveActor() {
+        if (this.isPlayer) {
+            //Test applying force to player.body
+            //Body.setVelocity(this.body, { x: cos(0), y: sin(0) });
+            console.log("x: " + this.body.position.x + " y: " + this.body.position.y);
+        }
     }
 }
 
