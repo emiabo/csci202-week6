@@ -1,7 +1,7 @@
 const NPCS = 3;
 var BUBBLE_DIAMETER;
 var iconOffset;
-var bubble = 20; //thickness of player bubble. infected threshold: BUBBLE_RADIUS
+var bubble = 20; //thickness of player bubble. infected threshold: BUBBLE_RADIUS 20-125
 var minBubble = 20;
 var infected = 0; //set to 100 when bubble reaches max, decrement after leaving
 var emojiDB;
@@ -13,20 +13,15 @@ var actors = [];
 var tvStatic;
 var tvFrame = 0;
 var flashing = true;
+var title = true;
 function preload() {
     emojiDB = loadJSON('assets/emoji-compact.json');
     tvStatic = [loadImage('assets/tvstatic/frame0.png'),           loadImage('assets/tvstatic/frame1.png'),           loadImage('assets/tvstatic/frame2.png')];
-    
 }
 
 function setup() {
-    if (displayWidth == 375 && displayHeight == 812) {
-        actualWidth = displayWidth * pixelDensity();
-        actualHeight = displayHeight * pixelDensity();
-    } else {
-        actualWidth = 375;
-        actualHeight = 812;
-    }
+    actualWidth = 375;
+    actualHeight = 812;
     iconOffset = actualWidth / 100 * 6;
     createCanvas(actualWidth, actualHeight).parent('gameLayer');
     frameRate(30);
@@ -37,6 +32,7 @@ function setup() {
     imageMode(CENTER);
     textAlign(CENTER, CENTER);
     textSize(iconSize);
+    textFont('Roboto Slab');
     //create player actor
     player = new Actor(true);
     //create others
@@ -58,20 +54,35 @@ function draw() {
         actors[i].drawActor();
     }
 
-    //infection detection
-    for (var i = 0; i < actors.length; i++) {
-        if (dist(player.x, player.y, actors[i].x, actors[i].y) < BUBBLE_DIAMETER/2 && bubble < BUBBLE_DIAMETER) {
-            bubble+=5;
-        } else if (bubble >= BUBBLE_DIAMETER) {
-            infected = 100;
+    if (!title) {
+        //infection detection
+        for (var i = 0; i < actors.length; i++) {
+            if (dist(player.x, player.y, actors[i].x, actors[i].y) < BUBBLE_DIAMETER/2 && bubble < BUBBLE_DIAMETER) {
+                bubble+=5;
+            } else if (bubble >= BUBBLE_DIAMETER) {
+                infected = 100;
+            }
         }
-    }
-    if (bubble > minBubble) {
-        bubble-=2;
-    }
-    //draw glitch bars based on infected
-    if (infected > 0) {
-        drawGlitch();
+        if (bubble > minBubble) {
+            bubble-=2;
+        }
+        //draw glitch bars based on infected
+        if (infected > 0) {
+            drawGlitch();
+        }
+    } else {
+        push();
+        textSize(144);
+        text('2M.', actualWidth/2, actualHeight/4);
+        textSize(48);
+        if (millis() > 1000) {
+            text('K E E P', actualWidth/2, 550);
+        } if (millis() > 2000) {
+            text('Y O U R', actualWidth/2, 650);
+        } if (millis() > 3000) {
+            text('D I S T A N C E', actualWidth/2, 750);
+        }
+        pop();
     }
 
     //toggle flashing
@@ -140,6 +151,7 @@ class Actor {
         if (this.isPlayer) {
             //If mouse is pressed or touch is down, set this.x and this.y
             if (mouseIsPressed && dist(mouseX, mouseY, this.x, this.y) <= BUBBLE_DIAMETER/2) {
+                title = false;
                 if (mouseX < actualWidth) {
                     this.x = mouseX;
                 }
@@ -147,6 +159,7 @@ class Actor {
                     this.y = mouseY;
                 }
             } else if (touches.length > 0 && dist(touches[0].x, touches[0].y, this.x, this.y) <= BUBBLE_DIAMETER/2) {
+                title = false;
                 this.x = touches[0].x;
                 this.y = touches[0].y;
             }

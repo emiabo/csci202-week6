@@ -28,14 +28,16 @@ A simulation/game about staying in your personal space. Inspired by my pandemic 
 - [x] Physics engine and controls
     - [...] Integrate Matter engine
     - [x] Direct controls (click/tap and drag on player)
-- [ ] Title screen
+- [x] Title screen
+    [?] drag to start graphic
 - [...] FAQ page
-- [ ] Sounds
+- [?] Sounds
 - [x] Test scaling (scale down to mobile screen size on larger devices)
 - [x] Photosensitive mode (disables flickering animations)
     - Turn on: any keyboard key or tap with 2+ fingers
 - [ ] Improve time to infect, width of glitch effect
 ## Known issues
 - Animation speed, particularly bubble filling, varies with display dimensions and is sometimes nearly instant.
+- Cannot implement any sound because of Chrome AudioContext blocking (does not allow any sound before user input)
 
 Trans 🏳️‍⚧️ rights!
