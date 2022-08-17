@@ -4,6 +4,8 @@
 
 #### Also: photosensitivity warning (makes use of a TV-static gif and flickering boxes around the screen). Press any key or tap with 2+ fingers to disable these.
 
+#### Thanks to @tholman for the [GitHub Corners](https://github.com/tholman/github-corners) link!
+
 A simulation/game about staying in your personal space. Inspired by my pandemic experiences of constantly keeping track of being 6 feet apart from everyone, and thus visualizing "bubbles" that get contaminated the longer they overlap.
     - Page will be composed of 2 layers
         - A window-spanning p5 canvas that scales all objects appropriately for different screen sizes/resolutions, and works reasonably well with touch/mouse/keyboard controls. Mobile support is something my last two projects were lacking.

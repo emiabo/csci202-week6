@@ -1,31 +1,10 @@
 body {
-    margin: 0;
+    margin: 1em 0;
     padding: 0;
     font-family: sans-serif;
     text-align: center;
     background-color: black;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto Slab', monospace;
-}
-
-#titleLayer {
-    display: none;
-    width: 375px;
-    margin: 0 auto;
-    -webkit-user-select: none; /* Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-}
-
-#titleLayer h1 {
-
-}
-/* May implement later...*/
-#faqLayer {
-    display: none;
+    color: white;
 }
 
 canvas {
