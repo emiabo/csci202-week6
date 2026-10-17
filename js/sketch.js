@@ -74,6 +74,7 @@ function setup() {
     //create others
     spawnNPCs();
     setupPointerControls();
+    setupInterface();
     var flashButton = document.getElementById('flashToggle');
     if (flashButton) {
         flashButton.addEventListener('click', toggleFlashing);
@@ -167,6 +168,8 @@ function draw() {
         rect(0, 0, actualWidth, actualHeight);
         pop();
     }
+
+    updateAudio();
 }
 
 //Game flow
@@ -197,6 +200,7 @@ function contaminate() {
     lives--;
     infected = 1;
     invulnerable = INFECT_TIME;
+    playBoom();
     if (navigator.vibrate) navigator.vibrate(200);
     //shove everyone nearby away so there's room to recover
     actors.forEach(a => {
@@ -222,6 +226,7 @@ function contaminate() {
 function setPaused(value) {
     //only an active run can be paused
     paused = value && (gameState === 'play' || gameState === 'clear');
+    updatePauseLabel();
 }
 
 function levelSpeed() {
@@ -259,6 +264,7 @@ function checkPickups() {
         if (!g.got && dist(player.x, player.y, g.x, g.y) < reach) {
             g.got = true;
             score += 100;
+            playBeep(1200);
             popups.push({text: '+100', x: g.x, y: g.y, age: 0});
         }
     });
@@ -268,6 +274,8 @@ function checkPickups() {
     }
     if (exitDoor && dist(player.x, player.y, exitDoor.x, exitDoor.y) < reach) {
         var bonus = 250 * level + 50 * lives;
+        playBeep(880);
+        setTimeout(() => playBeep(1320), 150);
         score += bonus;
         gameState = 'clear';
         stateTime = 0;
@@ -349,7 +357,7 @@ function drawTitle() {
         //gentle pulse so it's clear what to do
         fill(0, 128 + 127 * sin(millis() / 300));
         textSize(16 * scaleFactor);
-        var prompt = 'drag anywhere to move';
+        var prompt = 'drag anywhere to move\n? for how to play';
         if (highScore > 0) prompt += '\nbest: ' + highScore;
         text(prompt, player.x, player.y + BUBBLE_DIAMETER/2 + 24 * scaleFactor);
     }
@@ -665,6 +673,8 @@ function keyPressed() {
     if (anyDialogOpen()) return;
     if (key === 'f' || key === 'F') {
         toggleFlashing();
+    } else if (key === 'm' || key === 'M') {
+        toggleSound();
     } else if (key === 'p' || key === 'P' || keyCode === ESCAPE) {
         setPaused(!paused);
     } else if ((key === ' ' || keyCode === ENTER) && gameState === 'over' && stateTime > 1) {
@@ -691,7 +701,6 @@ function updateFlashLabel() {
     var flashButton = document.getElementById('flashToggle');
     if (flashButton) {
         flashButton.setAttribute('aria-pressed', String(!flashing));
-        flashButton.textContent = flashing ? 'Reduced flash: off' : 'Reduced flash: on';
     }
 }
 

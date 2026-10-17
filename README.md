@@ -4,7 +4,10 @@
 
 #### Also: photosensitivity warning (makes use of a TV-static gif and flickering boxes around the screen). Press F, tap with 2 fingers, or use the "Reduced flash" button to toggle these. Reduced flash is on by default if your system asks for reduced motion.
 
-#### Controls: drag the bubble to move it directly, drag anywhere else to steer it without covering it with your finger, or use the arrow keys / WASD.
+#### Controls: drag the bubble to move it directly, drag anywhere else to steer it without covering it with your finger, or use the arrow keys / WASD. P/Esc pauses, M mutes, and the ? button explains the rest.
+
+## How to play
+Collect everything on the shopping list at the bottom of the screen, then reach the 🚪 checkout to clear the aisle. Shoppers inside your bubble fill it (faster the closer they are); a full bubble costs one of three ❤️. Close talkers (💬) come over to chat every so often, shy shoppers back away. Each aisle adds more shoppers.
 
 #### Thanks to @tholman for the [GitHub Corners](https://github.com/tholman/github-corners) link!
 
@@ -33,9 +36,15 @@ A simulation/game about staying in your personal space. Inspired by my pandemic 
     - [...] Integrate Matter engine
     - [x] Direct controls (click/tap and drag on player)
 - [x] Title screen
-    [?] drag to start graphic
-- [...] FAQ page
-- [?] Sounds
+    - [x] drag to start prompt
+- [x] FAQ page (? button: how to play, controls, about)
+- [x] Sounds (mall ambience muffles and slows as your bubble fills and warps while glitching, boom when contaminated, scanner beeps for groceries)
+- [x] Levels with objectives (get the groceries, then reach the checkout)
+- [x] Lives, score and saved best score
+- [x] NPCs that wander, gravitate toward or avoid the player
+- [x] Lightweight physics without Matter.js (forces + friction, steering, wall bounces, separation)
+- [x] User-selectable player emoji
+- [x] Pause (also automatic when the tab loses focus)
 - [x] Test scaling (scale down to mobile screen size on larger devices)
 - [x] Photosensitive mode (disables flickering animations)
     - Toggle: F key, tap with 2 fingers, or the on-screen button
@@ -44,6 +53,6 @@ A simulation/game about staying in your personal space. Inspired by my pandemic 
 - [ ] Improve time to infect, width of glitch effect
 ## Known issues
 - ~~Animation speed, particularly bubble filling, varies with display dimensions and is sometimes nearly instant.~~ Fixed: rates are now time-based and relative to bubble size.
-- Cannot implement any sound because of Chrome AudioContext blocking (does not allow any sound before user input)
+- ~~Cannot implement any sound because of Chrome AudioContext blocking (does not allow any sound before user input)~~ Fixed: audio starts (and the ambience loads) on the first tap or key press.
 
 Trans 🏳️‍⚧️ rights!
