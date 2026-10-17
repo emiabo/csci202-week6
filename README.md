@@ -1,8 +1,10 @@
 # [CSCI 202 Assignment 6 - 2M](https://emiabo.github.io/csci202-week6/)
 
-#### This project is made for mobile and currently only tested on iPhone X screen size. Other devices may work, but some logic is tied to display size (working on it). Try using your browser's device simulator (Inspect > Toggle Device Toolbar on Chrome)
+#### This project was designed for mobile (iPhone X proportions), and the canvas now fills and rescales to any window or screen orientation.
 
-#### Also: photosensitivity warning (makes use of a TV-static gif and flickering boxes around the screen). Press any key or tap with 2+ fingers to disable these.
+#### Also: photosensitivity warning (makes use of a TV-static gif and flickering boxes around the screen). Press F, tap with 2 fingers, or use the "Reduced flash" button to toggle these. Reduced flash is on by default if your system asks for reduced motion.
+
+#### Controls: drag the bubble to move it directly, drag anywhere else to steer it without covering it with your finger, or use the arrow keys / WASD.
 
 #### Thanks to @tholman for the [GitHub Corners](https://github.com/tholman/github-corners) link!
 
@@ -36,10 +38,12 @@ A simulation/game about staying in your personal space. Inspired by my pandemic 
 - [?] Sounds
 - [x] Test scaling (scale down to mobile screen size on larger devices)
 - [x] Photosensitive mode (disables flickering animations)
-    - Turn on: any keyboard key or tap with 2+ fingers
+    - Toggle: F key, tap with 2 fingers, or the on-screen button
+- [x] Fill and rescale to the window on resize/rotation
+- [x] Keyboard controls (arrows/WASD) and drag-anywhere touch controls
 - [ ] Improve time to infect, width of glitch effect
 ## Known issues
-- Animation speed, particularly bubble filling, varies with display dimensions and is sometimes nearly instant.
+- ~~Animation speed, particularly bubble filling, varies with display dimensions and is sometimes nearly instant.~~ Fixed: rates are now time-based and relative to bubble size.
 - Cannot implement any sound because of Chrome AudioContext blocking (does not allow any sound before user input)
 
 Trans 🏳️‍⚧️ rights!
