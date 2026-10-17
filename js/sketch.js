@@ -571,6 +571,12 @@ class Actor {
             desiredX = -toPlayerX / d * speed * 1.2;
             desiredY = -toPlayerY / d * speed * 1.2;
         }
+        //turn away from walls so nobody gets stuck wandering into a corner
+        var margin = BUBBLE_DIAMETER / 2;
+        if (this.x < margin) desiredX += speed * 2 * (1 - this.x / margin);
+        if (this.x > actualWidth - margin) desiredX -= speed * 2 * (1 - (actualWidth - this.x) / margin);
+        if (this.y < margin) desiredY += speed * 2 * (1 - this.y / margin);
+        if (this.y > actualHeight - margin) desiredY -= speed * 2 * (1 - (actualHeight - this.y) / margin);
         //steer toward the desired velocity instead of snapping to it
         var steering = min(1, 2.5 * dt);
         this.vx += (desiredX - this.vx) * steering;
