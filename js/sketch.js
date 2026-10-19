@@ -200,7 +200,7 @@ function contaminate() {
     lives--;
     infected = 1;
     invulnerable = INFECT_TIME;
-    playBoom();
+    playContactSound();
     if (navigator.vibrate) navigator.vibrate(200);
     //shove everyone nearby away so there's room to recover
     actors.forEach(a => {

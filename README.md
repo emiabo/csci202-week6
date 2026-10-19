@@ -38,7 +38,7 @@ A simulation/game about staying in your personal space. Inspired by my pandemic 
 - [x] Title screen
     - [x] drag to start prompt
 - [x] FAQ page (? button: how to play, controls, about)
-- [x] Sounds (mall ambience muffles and slows as your bubble fills and warps while glitching, boom when contaminated, scanner beeps for groceries)
+- [x] Sounds (mall ambience muffles and slows as your bubble fills and warps while glitching, a bubble pop and burst of TV static when contaminated, scanner beeps for groceries)
 - [x] Levels with objectives (get the groceries, then reach the checkout)
 - [x] Lives, score and saved best score
 - [x] NPCs that wander, gravitate toward or avoid the player

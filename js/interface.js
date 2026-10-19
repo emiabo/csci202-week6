@@ -5,7 +5,10 @@ const PLAYER_EMOJI = ['😷', '😀', '😎', '🤓', '🥸', '🤠', '🥳', '�
 var soundOn = true;
 var audioStarted = false;
 var ambient = null;
-var boom = null;
+var popTone;
+var popEnvelope;
+var crackle;
+var crackleEnvelope;
 var lowpass;
 var beep;
 var beepEnvelope;
@@ -114,11 +117,24 @@ function startAudio() {
         ambientVolume = 0;
         ambient.loop();
     });
-    loadSound('assets/sounds/boom.mp3', (sound) => {
-        boom = sound;
-        boom.disconnect();
-        new p5.Distortion(0.3).process(boom);
-    });
+    //contact sound: the bubble pops, then a burst of TV static to match the glitch
+    popTone = new p5.Oscillator('sine');
+    popTone.amp(0);
+    popTone.start();
+    popEnvelope = new p5.Envelope();
+    popEnvelope.setADSR(0.002, 0.12, 0, 0.05);
+    popEnvelope.setRange(0.4, 0);
+    crackle = new p5.Noise('white');
+    crackle.disconnect();
+    var staticBand = new p5.BandPass();
+    staticBand.freq(3000);
+    staticBand.res(0.8);
+    staticBand.process(crackle);
+    crackle.amp(0);
+    crackle.start();
+    crackleEnvelope = new p5.Envelope();
+    crackleEnvelope.setADSR(0.01, 0.7, 0, 0.1);
+    crackleEnvelope.setRange(0.3, 0);
     //checkout scanner beep for pickups
     beep = new p5.Oscillator('square');
     beep.amp(0);
@@ -134,8 +150,12 @@ function playBeep(freq) {
     beepEnvelope.play(beep);
 }
 
-function playBoom() {
-    if (soundOn && boom) boom.play();
+function playContactSound() {
+    if (!soundOn || !popTone) return;
+    popTone.freq(900);
+    popTone.freq(140, 0.12);
+    popEnvelope.play(popTone);
+    crackleEnvelope.play(crackle, 0.05);
 }
 
 //Called every frame: the mall gets muffled and slows down as your bubble fills, and warps while glitching
